@@ -34,22 +34,22 @@ export default function Search({
       search: '',
       hasMore: false,
     })
-  const [results, setResults] = useState<IQuestion[]>([])
+  const [results, setResults] = useState<IQuestion[] | null>(null)
   const [isFetching, setIsFetching] = useState(false)
 
   const loadResults = (intitle: string) => {
     setIsFetching(true)
     const page = searchState.page
+    const isNew = intitle !== searchState.search
     SearchApi.get({ intitle, page }).then(({ data }) => {
+      const questions = [...( results && !isNew ? results : []), ...data.items]
+      setResults(questions)
       setIsFetching(false)
       setSearchState({
-        page: 1 + page,
+        page: 1 + (page * +!isNew),
         search: intitle,
         hasMore: data.has_more,
       })
-      setIsFetching(false)
-
-      setResults([...results, ...data.items])
     })
   }
 
@@ -101,12 +101,20 @@ export default function Search({
         >
           {isExpanded ? (
             <div className='w-full h-fit flex flex-col'>
-              {results.map((res, i) => (
-                <QuestionTab
-                  key={i + res.link}
-                  question={res}
-                />
-              ))}
+              {
+                results
+                ? results.map((res, i) => (
+                  <QuestionTab
+                    key={i + res.link}
+                    question={res}
+                  />
+                ))
+                : Array.isArray(results)
+                ? <Typography className='text-disabled m-auto py-2'>
+                    Unfortunately, nothing was found.
+                  </Typography>
+                : <></>
+              }
             </div>
           ) : (
             <></>
