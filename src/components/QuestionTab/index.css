@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.tab {
+  @apply w-full h-fit p-3 duration-500 text-white opacity-30 overflow-hidden;
+  &:hover {
+    @apply opacity-100;
+  }
+}
+.icon {
+  @apply my-auto min-w-[30px] mx-2 h-auto duration-300 opacity-50;
+  &:hover {
+    @apply opacity-100;
+  }
+}
+
+.answer {
+  @apply flex duration-300 overflow-hidden;
+}

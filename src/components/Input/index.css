@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input {
+  @apply w-full h-full !px-3 !text-white bg-dark border-b border-disabled rounded-l-lg outline-none opacity-50 duration-300;
+  &:focus {
+    @apply border-primary outline-none opacity-100 shadow-seacrh shadow-primary;
+  }
+}
+div {
+  @apply flex;
+}
+button {
+  @apply w-[60px] bg-primary border-b border-l border-primary rounded-r-lg duration-300;
+  &:hover {
+    @apply shadow-seacrh shadow-primary;
+  }
+  svg {
+    filter: invert(100%) sepia(0%) saturate(7470%)
+      hue-rotate(116deg) brightness(109%) contrast(109%);
+  }
+}

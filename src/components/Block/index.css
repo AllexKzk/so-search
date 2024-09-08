@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.block {
+  @apply border border-primary rounded-lg h-fit;
+}
