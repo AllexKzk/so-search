@@ -102,7 +102,7 @@ export default function Search({
           {isExpanded ? (
             <div className='w-full h-fit flex flex-col'>
               {
-                results
+                results?.length
                 ? results.map((res, i) => (
                   <QuestionTab
                     key={i + res.link}
